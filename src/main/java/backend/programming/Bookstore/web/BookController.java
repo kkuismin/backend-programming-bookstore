@@ -9,7 +9,7 @@ import backend.programming.Bookstore.domain.Book;
 @Controller
 public class BookController {
 
-	@GetMapping("index")
+	@GetMapping("/index")
 	public String indexPage(Model model) {
 		model.addAttribute("book", new Book());
 		return "index";
