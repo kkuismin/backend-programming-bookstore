@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import backend.programming.Bookstore.domain.Book;
@@ -25,5 +26,17 @@ public class BookController {
 		System.out.println("getting books from db");
 		model.addAttribute("books", bookRepository.findAll());
 		return "booklist";
+	}
+	
+	@GetMapping("/addBook")
+	public String addNewBook(Model model) {
+		model.addAttribute("book", new Book());
+		return "newBook";
+	}
+	
+	@PostMapping("saveBook")
+	public String saveBook(Book book, Model model) {
+		bookRepository.save(book);
+		return "redirect:/booklist";
 	}
 }
